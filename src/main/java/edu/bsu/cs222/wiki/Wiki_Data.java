@@ -46,6 +46,11 @@ public class Wiki_Data
         return connection;
     }
 
+    private static Document readJSonFileFrom()
+    {
+        return null;
+    }
+
     private static String encodeValue(String value)
     {
         try {

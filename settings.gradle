@@ -1,2 +1,4 @@
 rootProject.name = 'Project1'
+include 'gson:2.8.5'
+
 

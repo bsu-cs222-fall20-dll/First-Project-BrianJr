@@ -18,6 +18,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -25,16 +29,22 @@ public class Wiki_Data
 {
     public static void main(String[] args) throws IOException
     {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the name of the article you want to search: ");
-        String wikiArticleName = input.nextLine();
-        connectToWiki(wikiArticleName);
+
+        articleToSearchFor();
+        connectToWiki();
 
     }
 
-    private static URLConnection connectToWiki(String wikiArticleName) throws IOException
+    public static String articleToSearchFor()
     {
-        String encodedQuery = encodeValue(wikiArticleName);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the name of the article you want to search: ");
+        return input.nextLine();
+    }
+
+    private static URLConnection connectToWiki() throws IOException
+    {
+        String encodedQuery = encodeValue( articleToSearchFor() );
 
         URL url = new URL(
                 "\"https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace" +
@@ -46,9 +56,20 @@ public class Wiki_Data
         return connection;
     }
 
-    private static Document readJSonFileFrom()
+    private static void getUserRevisions() throws IOException
     {
-        return null;
+        URLConnection json = connectToWiki();
+        JsonObject wiki_Article = new JsonParser().parse(String.valueOf(json)).getAsJsonObject();
+
+        JsonArray array = wiki_Article.getAsJsonArray("revisions");
+
+        for ( int i = 0; i < array.size(); i++)
+        {
+            String userName = array.get(i).getAsJsonObject().get("user").getAsString();
+            String timestamp = array.get(i).getAsJsonObject().get("user").getAsString();
+            System.out.println(userName);
+            System.out.println(timestamp);
+        }
     }
 
     private static String encodeValue(String value)

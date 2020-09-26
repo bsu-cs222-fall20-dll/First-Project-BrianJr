@@ -13,7 +13,7 @@ public class Main
         System.out.println("\nEnter the name of the article you are searching for: ");
         String articleName = input.nextLine();
 
-        UserRevisionParser revisionParser = new UserRevisionParser();
+        UserRevisionSorter revisionParser = new UserRevisionSorter();
         ConnectToWiki toWiki = new ConnectToWiki();
         InputStream wikiConnection = toWiki.connectToWikipedia(articleName);
 

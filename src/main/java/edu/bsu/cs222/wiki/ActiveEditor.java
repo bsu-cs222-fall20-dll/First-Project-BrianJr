@@ -4,9 +4,9 @@ import com.google.gson.*; import java.io.InputStream;
 
 public class ActiveEditor
 {
-    public void mostActiveEditor(UserRevisionParser revisionParser, InputStream connection)
+    public void mostActiveEditor(UserRevisionSorter revisionParser, InputStream connection)
     {
-        JsonArray array = revisionParser.revisionFinder(connection);
+        JsonArray array = revisionParser.userRevision(connection);
 
         for (int i = 0; i < array.size(); i++)
         {

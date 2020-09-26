@@ -4,9 +4,9 @@ import com.google.gson.*; import java.io.InputStream;
 
 public class RecentChanges
 {
-    public void mostRecentAuthors(UserRevisionParser revisionParser, InputStream connection)
+    public void mostRecentAuthors(UserRevisionSorter revisionParser, InputStream connection)
     {
-        JsonArray array = revisionParser.revisionFinder(connection);
+        JsonArray array = revisionParser.userRevision(connection);
 
         for (int count = 0; count < array.size(); count++)
         {

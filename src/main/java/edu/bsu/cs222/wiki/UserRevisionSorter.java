@@ -4,9 +4,9 @@ import com.google.gson.*;
 import java.io.*;
 import java.util.Map;
 
-public class UserRevisionParser
+public class UserRevisionSorter
 {
-    public JsonArray revisionFinder(InputStream connection)
+    public JsonArray userRevision(InputStream connection)
     {
         JsonParser parser = new JsonParser();
         Reader reader = new InputStreamReader(connection);

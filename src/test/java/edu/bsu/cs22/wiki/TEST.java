@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import edu.bsu.cs222.wiki.UserRevisionSorter;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -37,4 +38,15 @@ public class TEST
         Assert.assertEquals(4, array.size());
         System.out.println(array);
     }
+
+    @Test
+    public void UserRevisionParserTEST()
+    {
+        UserRevisionSorter revisionParser = new UserRevisionSorter();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sample.json");
+        JsonArray revisionArray = revisionParser.userRevision(inputStream);
+        assert revisionArray != null;
+        System.out.println(revisionArray);
+    }
+
 }

@@ -32,6 +32,7 @@ public class TEST
             array = entryObject.getAsJsonArray("revisions");
             Assert.assertNotNull(array);
         }
+
         assert array != null;
         Assert.assertEquals(4, array.size());
         System.out.println(array);

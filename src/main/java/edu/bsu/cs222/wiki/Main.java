@@ -27,7 +27,7 @@ public class Main
             changes.mostRecentAuthors(revisionParser,wikiConnection);
         }
 
-        else if ( userResponse.equalsIgnoreCase("Active User") )
+        else if ( userResponse.equalsIgnoreCase("Active Editors") )
         {
             ActiveEditor activeUser = new ActiveEditor();
             activeUser.mostActiveEditor(revisionParser,wikiConnection);

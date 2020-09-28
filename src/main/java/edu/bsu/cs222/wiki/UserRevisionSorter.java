@@ -13,6 +13,7 @@ public class UserRevisionSorter
         JsonElement rootElement = parser.parse(reader);
         JsonObject rootObject = rootElement.getAsJsonObject();
         JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
+
         JsonArray array = null;
 
         for( Map.Entry<String,JsonElement> entry : pages.entrySet() )

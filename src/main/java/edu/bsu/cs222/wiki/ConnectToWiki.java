@@ -11,6 +11,7 @@ public class ConnectToWiki
 {
     public InputStream connectToWikipedia(String articleName) throws IOException
     {
+        Notify notify = new Notify();
         String wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop" +
                 "=timestamp%7Cuser&rvlimit=20&titles=";
 
@@ -21,8 +22,12 @@ public class ConnectToWiki
                 "CS222FirstProject/0.1 (bkwalker@bsu.edu)");
         connection.connect();
 
+
         InputStream in = connection.getInputStream();
-        System.out.println(connection);
+        notify.NotifyUser(in);
+
+        System.out.println("Connected!");
+
 
         return in;
     }

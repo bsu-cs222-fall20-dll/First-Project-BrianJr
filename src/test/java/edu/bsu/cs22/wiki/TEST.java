@@ -16,10 +16,10 @@ import java.util.Map;
 public class TEST
 {
     @Test
-    public void revisionCountTest()
+    public void UserRevisionSorterTEST()
     {
         JsonParser parser = new JsonParser();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sample.json");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
         assert inputStream != null;
         Reader reader = new InputStreamReader(inputStream);
         JsonElement rootElement = parser.parse(reader);
@@ -37,16 +37,33 @@ public class TEST
         assert array != null;
         Assert.assertEquals(4, array.size());
         System.out.println(array);
+
     }
 
     @Test
-    public void UserRevisionParserTEST()
+    public void NotifyTEST_ArticleThatDoesNotExist()
     {
-        UserRevisionSorter revisionParser = new UserRevisionSorter();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sample.json");
-        JsonArray revisionArray = revisionParser.userRevision(inputStream);
-        assert revisionArray != null;
-        System.out.println(revisionArray);
-    }
+        JsonParser parser = new JsonParser();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
+        assert inputStream != null;
+        Reader reader = new InputStreamReader(inputStream);
+        JsonElement rootElement = parser.parse(reader);
+        JsonObject rootObject = rootElement.getAsJsonObject();
+        JsonObject error =
+                rootObject.getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject("-1");
 
+        if (error.has("missing"))
+        {
+            //Assert.assertNull(error);
+            System.out.println("This page does not exist.");
+        }
+
+        else
+        {
+            //Assert.assertNotNull(error);
+            UserRevisionSorter revisionSorter = new UserRevisionSorter();
+            revisionSorter.userRevision(inputStream);
+
+        }
+    }
 }

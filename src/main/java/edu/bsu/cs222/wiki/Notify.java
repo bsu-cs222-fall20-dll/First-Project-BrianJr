@@ -1,11 +1,14 @@
 package edu.bsu.cs222.wiki;
 
-import java.net.URLConnection;
+import java.io.InputStream;
 
 public class Notify
 {
-    public void NotifyUser(URLConnection connection)
+    public void NotifyUser(InputStream connection)
     {
-        System.out.println();
+        if (connection == null)
+        {
+            System.out.println("The article you searched for does not exist.");
+        }
     }
 }

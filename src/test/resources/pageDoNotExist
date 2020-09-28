@@ -1,0 +1,20 @@
+{
+  "continue": {
+    "rvcontinue": "20200810005846|972072956",
+    "continue": "||"
+  },
+  "query": {
+    "redirects": [
+      {
+        "from": "Zappa",
+        "to": "Frank Zappa"
+      }
+    ],
+    "pages": {
+      "-1": {
+        "ns": 0,
+        "title": "missing"
+      }
+    }
+  }
+}

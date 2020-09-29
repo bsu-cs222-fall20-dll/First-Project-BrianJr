@@ -1,17 +1,10 @@
 package edu.bsu.cs22.wiki;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import edu.bsu.cs222.wiki.Notify;
-import edu.bsu.cs222.wiki.UserRevisionSorter;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import com.google.gson.*;
+import edu.bsu.cs222.wiki.UserRevisionSorter;
+import org.junit.*;
+import java.io.*;
 import java.util.Map;
 
 public class TEST
@@ -38,24 +31,17 @@ public class TEST
         assert array != null;
         Assert.assertEquals(4, array.size());
         System.out.println(array);
-
     }
 
     @Test
-    public void NotifyTEST_ArticleThatDoesNotExist() throws Notify
+    public void RedirectTEST()
     {
-        UserRevisionSorter userRevisionSorter = new UserRevisionSorter();
-
+        UserRevisionSorter sorter = new UserRevisionSorter();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
-        assert inputStream != null;
-        JsonArray json = userRevisionSorter.getUserRevisionArray(inputStream);
-        assert json != null;
+        JsonObject rootObject = sorter.getQueryObject(inputStream);
 
-        InputStream errorPage = getClass().getClassLoader().getResourceAsStream("errorPage.json");
-        JsonArray noPageExist = userRevisionSorter.getUserRevisionArray(errorPage);
-        System.out.println(noPageExist);
-
-        assert noPageExist == null;
-        System.out.println(json);
+        System.out.println("------------------------------------------");
+        sorter.redirectedTo(rootObject);
+        System.out.println("------------------------------------------");
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs22.wiki.TEST" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-28T21:45:53" hostname="DESKTOP-G34D6HI" time="0.057">
+<testsuite name="edu.bsu.cs22.wiki.TEST" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-29T16:59:47" hostname="DESKTOP-G34D6HI" time="0.054">
   <properties/>
-  <testcase name="NotifyTEST_ArticleThatDoesNotExist()" classname="edu.bsu.cs22.wiki.TEST" time="0.057"/>
-  <system-out><![CDATA[The article you searched for does not exist.
-null
-[{"user":"Neveselbert","timestamp":"2020-08-17T21:54:47Z"},{"user":"100.34.139.116","anon":"","timestamp":"2020-08-13T06:22:45Z"},{"user":"100.34.139.116","anon":"","timestamp":"2020-08-3T06:21:06Z"},{"user":"2600:8801:1A83:5E00:4DC7:98DF:8B05:4A54","anon":"","timestamp":"2020-08-  10T01:02:02Z"}]
+  <testcase name="RedirectTEST()" classname="edu.bsu.cs22.wiki.TEST" time="0.054"/>
+  <system-out><![CDATA[------------------------------------------
+You have been redirected to: Frank Zappa
+------------------------------------------
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

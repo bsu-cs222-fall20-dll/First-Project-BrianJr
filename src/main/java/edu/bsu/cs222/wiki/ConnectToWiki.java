@@ -1,6 +1,7 @@
 package edu.bsu.cs222.wiki;
 
-import java.io.InputStream; import java.net.*;
+import java.io.InputStream;
+import java.net.*;
 
 public class ConnectToWiki
 {
@@ -9,6 +10,10 @@ public class ConnectToWiki
         URL url = generateQueryURL(articleName);
         java.net.URLConnection connection = url.openConnection();
 
+        if (connection == null)
+        { System.out.println("Connection has not been established."); }
+
+        assert connection != null;
         connection.setRequestProperty("User-Agent", "Project UNO/0.1 (bkwalker@bsu.edu)");
         connection.connect();
 
@@ -17,6 +22,8 @@ public class ConnectToWiki
         try
         {
             in = connection.getInputStream();
+            assert false;
+
             System.out.println("--------------------------");
             System.out.println("Connection Established!");
         }

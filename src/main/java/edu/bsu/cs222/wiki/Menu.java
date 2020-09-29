@@ -1,6 +1,7 @@
 package edu.bsu.cs222.wiki;
 
-import java.io.*; import java.util.Scanner;
+import java.io.*;
+import java.util.Scanner;
 
 public class Menu
 {

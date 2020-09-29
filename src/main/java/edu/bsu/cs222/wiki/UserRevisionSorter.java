@@ -1,13 +1,13 @@
 package edu.bsu.cs222.wiki;
 
-import com.google.gson.*; import java.io.*; import java.util.Map;
+import com.google.gson.*;
+import java.io.*;
+import java.util.Map;
 
 public class UserRevisionSorter
 {
     public JsonArray getUserRevisionArray(InputStream connection) throws Notify
-    {
-        return parse(getQueryObject(connection));
-    }
+    { return parse(getQueryObject(connection)); }
 
     public JsonObject getQueryObject(InputStream stream)
     {
@@ -18,6 +18,20 @@ public class UserRevisionSorter
         // THE ROOT ELEMENT CONVERTS THAT ELEMENT INTO AN OBJECT WE CAN QUERY
         JsonObject rootObject = rootElement.getAsJsonObject();
         return rootObject.getAsJsonObject("query");
+    }
+
+    public void redirectedTo(JsonObject queryObject)
+    {
+        JsonArray array = queryObject.getAsJsonArray("redirects");
+
+        if (array == null)
+        { return; }
+
+        for (int i = 0; i < array.size(); i++)
+        {
+            String redirectedTo = array.get(i).getAsJsonObject().get("to").getAsString();
+            System.out.printf("You have been redirected to: %s\n",redirectedTo);
+        }
     }
 
     public JsonArray parse(JsonObject queryObject) throws Notify

@@ -4,7 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import edu.bsu.cs222.wiki.Notify;
 import edu.bsu.cs222.wiki.UserRevisionSorter;
+import netscape.javascript.JSObject;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -41,29 +43,20 @@ public class TEST
     }
 
     @Test
-    public void NotifyTEST_ArticleThatDoesNotExist()
+    public void NotifyTEST_ArticleThatDoesNotExist() throws Notify
     {
-        JsonParser parser = new JsonParser();
+        UserRevisionSorter userRevisionSorter = new UserRevisionSorter();
+
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
         assert inputStream != null;
-        Reader reader = new InputStreamReader(inputStream);
-        JsonElement rootElement = parser.parse(reader);
-        JsonObject rootObject = rootElement.getAsJsonObject();
-        JsonObject error =
-                rootObject.getAsJsonObject("query").getAsJsonObject("pages").getAsJsonObject("-1");
+        JsonArray json = userRevisionSorter.getUserRevisionArray(inputStream);
+        assert json != null;
 
-        if (error.has("missing"))
-        {
-            //Assert.assertNull(error);
-            System.out.println("This page does not exist.");
-        }
+        InputStream errorPage = getClass().getClassLoader().getResourceAsStream("errorPage.json");
+        JsonArray noPageExist = userRevisionSorter.getUserRevisionArray(errorPage);
+        System.out.println(noPageExist);
 
-        else
-        {
-            //Assert.assertNotNull(error);
-            UserRevisionSorter revisionSorter = new UserRevisionSorter();
-            revisionSorter.userRevision(inputStream);
-
-        }
+        assert noPageExist == null;
+        System.out.println(json);
     }
 }

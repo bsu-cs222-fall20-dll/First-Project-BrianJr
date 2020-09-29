@@ -6,18 +6,33 @@ import java.util.Map;
 
 public class UserRevisionSorter
 {
-    public JsonArray userRevision(InputStream connection)
+    public JsonArray getUserRevisionArray(InputStream connection) throws Notify
+    {
+        return parse(getQueryObject(connection));
+    }
+
+    public JsonObject getQueryObject(InputStream stream)
     {
         JsonParser parser = new JsonParser();
-        Reader reader = new InputStreamReader(connection);
+        Reader reader = new InputStreamReader(stream);
+        // GETS THE ENTIRE JSON OBJECT
         JsonElement rootElement = parser.parse(reader);
+        // THE ROOT ELEMENT CONVERTS THAT ELEMENT INTO AN OBJECT WE CAN QUERY
         JsonObject rootObject = rootElement.getAsJsonObject();
-        JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
+        return rootObject.getAsJsonObject("query");
+    }
 
+    public JsonArray parse(JsonObject queryObject) throws Notify
+    {
+        JsonObject pages = queryObject.getAsJsonObject("pages");
         JsonArray array = null;
 
-        for( Map.Entry<String,JsonElement> entry : pages.entrySet() )
+        // ITERATE OVER EVERY ENTRY IN PAGES
+        for (Map.Entry <String, JsonElement> entry : pages.entrySet())
         {
+            boolean pageNotFound = entry.getKey().equals("-1");
+            if (pageNotFound)
+            { throw new Notify("Page not found"); }
             JsonObject entryObject = entry.getValue().getAsJsonObject();
             array = entryObject.getAsJsonArray("revisions");
         }

@@ -4,7 +4,7 @@ import java.io.*; import java.util.Scanner;
 
 public class Main
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws Exception
     {
         Scanner input = new Scanner(System.in);
 
@@ -15,7 +15,7 @@ public class Main
 
         UserRevisionSorter revisionParser = new UserRevisionSorter();
         ConnectToWiki toWiki = new ConnectToWiki();
-        InputStream wikiConnection = toWiki.connectToWikipedia(articleName);
+        InputStream wikiConnection = toWiki.Query(articleName);
 
         displayMenuChoices();
 

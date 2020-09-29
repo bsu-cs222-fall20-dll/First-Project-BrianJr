@@ -1,14 +1,10 @@
 package edu.bsu.cs222.wiki;
 
-import java.io.InputStream;
-
-public class Notify
+public class Notify extends Exception
 {
-    public void NotifyUser(InputStream connection)
+    public Notify(String page_not_found)
     {
-        if (connection == null)
-        {
-            System.out.println("The article you searched for does not exist.");
-        }
+        System.out.println(page_not_found);
     }
+
 }

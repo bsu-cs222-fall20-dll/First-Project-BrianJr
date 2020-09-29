@@ -4,20 +4,22 @@ import com.google.gson.*; import java.io.InputStream;
 
 public class RecentChanges
 {
-    public void mostRecentAuthors(UserRevisionSorter revisionParser, InputStream connection)
+    public void mostRecentAuthors(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
-        JsonArray array = revisionParser.userRevision(connection);
+        JsonArray array = revisionParser.getUserRevisionArray(connection);
 
-        for (int count = 0; count < array.size(); count++)
+        for (int i = 0; i < array.size(); i++)
         {
+            //prints each user
             System.out.println("--------------------------");
-            System.out.printf("Editor %d: ", (count + 1));
-            JsonObject submission = array.get(count).getAsJsonObject();
+            System.out.printf("Editor %d: ", (i + 1));
+            JsonObject submission = array.get(i).getAsJsonObject();
             JsonElement user = submission.get("user");
             System.out.println(user);
 
+            //prints each time stamp
             System.out.print("Time Stamp: ");
-            JsonObject submissionTime = array.get(count).getAsJsonObject();
+            JsonObject submissionTime = array.get(i).getAsJsonObject();
             JsonElement timeStamp = submissionTime.get("timestamp");
             System.out.println(timeStamp);
         }

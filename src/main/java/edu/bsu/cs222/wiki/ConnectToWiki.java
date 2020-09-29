@@ -1,16 +1,11 @@
 package edu.bsu.cs222.wiki;
 
-import java.io.InputStream;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLEncoder;
-
+import java.io.InputStream; import java.net.*;
 
 public class ConnectToWiki
 {
     public InputStream Query(String articleName) throws Exception
     {
-
         URL url = generateQueryURL(articleName);
         java.net.URLConnection connection = url.openConnection();
 
@@ -23,7 +18,7 @@ public class ConnectToWiki
         {
             in = connection.getInputStream();
             System.out.println("--------------------------");
-            System.out.println("Connected!");
+            System.out.println("Connection Established!");
         }
 
         catch(SocketTimeoutException e)

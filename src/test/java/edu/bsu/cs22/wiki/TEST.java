@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import edu.bsu.cs222.wiki.Notify;
 import edu.bsu.cs222.wiki.UserRevisionSorter;
-import netscape.javascript.JSObject;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

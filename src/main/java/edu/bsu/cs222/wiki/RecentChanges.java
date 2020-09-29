@@ -23,5 +23,7 @@ public class RecentChanges
             JsonElement timeStamp = submissionTime.get("timestamp");
             System.out.println(timeStamp);
         }
+        System.out.println("--------------------------");
+        System.out.println("Done!");
     }
 }

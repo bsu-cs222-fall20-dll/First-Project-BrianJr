@@ -6,5 +6,4 @@ public class Notify extends Exception
     {
         System.out.println(page_not_found);
     }
-
 }

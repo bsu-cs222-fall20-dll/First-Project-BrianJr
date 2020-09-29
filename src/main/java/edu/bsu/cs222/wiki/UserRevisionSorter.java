@@ -1,8 +1,6 @@
 package edu.bsu.cs222.wiki;
 
-import com.google.gson.*;
-import java.io.*;
-import java.util.Map;
+import com.google.gson.*; import java.io.*; import java.util.Map;
 
 public class UserRevisionSorter
 {

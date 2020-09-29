@@ -6,12 +6,13 @@ public class ActiveEditor
 {
     public void mostActiveEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
-
         JsonArray array = revisionParser.getUserRevisionArray(connection);
 
+        int userCount = 0;
         for (int i = 0; i < array.size(); i++)
         {
             int changes = 0;
+            userCount++;
             JsonObject submission = array.get(i).getAsJsonObject();
             JsonElement userToCheck = submission.get("user");
 
@@ -24,10 +25,15 @@ public class ActiveEditor
                 }
             }
 
-            if (changes >= 0) {
-                System.out.println("Active User:" + userToCheck);
-                System.out.println("Number of changes: " + (changes + 1) + "\n" );
+            if (changes >= 0)
+            {
+                System.out.println("--------------------------");
+                System.out.printf("Active Editor #%d: ", userCount);
+                System.out.print(userToCheck);
+                System.out.println("\nNumber of changes: " + (changes + 1)  );
             }
         }
+        System.out.println("--------------------------");
+        System.out.println("Done!");
     }
 }

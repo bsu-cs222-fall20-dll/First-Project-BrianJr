@@ -37,7 +37,7 @@ public class TEST
     public void RedirectTEST()
     {
         UserRevisionSorter sorter = new UserRevisionSorter();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sample.json");
         JsonObject rootObject = sorter.getQueryObject(inputStream);
 
         System.out.println("------------------------------------------");

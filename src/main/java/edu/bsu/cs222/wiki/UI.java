@@ -1,9 +1,10 @@
 package edu.bsu.cs222.wiki;
 
+
 import java.io.*;
 import java.util.Scanner;
 
-public class Menu
+public class UI
 {
     public void startApplication() throws Exception
     {
@@ -32,7 +33,7 @@ public class Menu
                 if (userResponse.equalsIgnoreCase("Recent Changes") )
                 {
                     RecentChanges changes = new RecentChanges();
-                    changes.mostRecentAuthors(revisionParser, wikiConnection);
+                    changes.mostRecentEditor(revisionParser, wikiConnection);
                 }
 
                 else if (userResponse.equalsIgnoreCase("Active Editors"))

@@ -12,7 +12,7 @@ public class ActiveEditor
 
         int userCount = 0;
 
-        //Collects each user element in array, currentUser
+        //Collects first user element in the array, currentUser
         for (int i = 0; i < array.size(); i++)
         {
             int userChanges = 0;
@@ -20,7 +20,7 @@ public class ActiveEditor
             JsonObject userElement = array.get(i).getAsJsonObject();
             JsonElement currentUser = userElement.get("user");
 
-            //Collects the next currentUser element in array, theNextUser
+            //Collects the next user element in the array, theNextUser
             for (int j = i + 1; j < array.size(); j++)
             {
                 JsonObject theNextUserElement = array.get(j).getAsJsonObject();
@@ -43,7 +43,7 @@ public class ActiveEditor
 
             if (userChanges < 0)
             {
-                System.out.println("There has been changes to this article.");
+                System.out.println("There has been no changes to this article.");
             }
         }
 

@@ -12,11 +12,7 @@ public class Main extends Application implements EventHandler<ActionEvent>
 {
 
     public static void main(String[] args)
-    {
-        //UI ui = new UI();
-        //ui.startApplication();
-        launch(args);
-    }
+    { launch(args); }
 
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -26,12 +22,9 @@ public class Main extends Application implements EventHandler<ActionEvent>
         primaryStage.setTitle("Wiki Search Simulator");
         primaryStage.setScene(new Scene(root,350,350));
         primaryStage.show();
-
     }
 
     @Override
     public void handle(ActionEvent event)
-    {
-
-    }
+    {}
 }

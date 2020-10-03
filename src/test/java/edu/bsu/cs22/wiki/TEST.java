@@ -3,7 +3,9 @@ package edu.bsu.cs22.wiki;
 
 import com.google.gson.*;
 import edu.bsu.cs222.wiki.UserRevisionSorter;
-import org.junit.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.io.*;
 import java.util.Map;
 
@@ -25,11 +27,11 @@ public class TEST
         {
             JsonObject entryObject = entry.getValue().getAsJsonObject();
             array = entryObject.getAsJsonArray("revisions");
-            Assert.assertNotNull(array);
+            Assertions.assertNotNull(array);
         }
 
         assert array != null;
-        Assert.assertEquals(4, array.size());
+        Assertions.assertEquals(4, array.size());
         System.out.println(array);
     }
 
@@ -37,7 +39,7 @@ public class TEST
     public void RedirectTEST()
     {
         UserRevisionSorter sorter = new UserRevisionSorter();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("sample.json");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("otherSample.json");
         JsonObject rootObject = sorter.getQueryObject(inputStream);
 
         System.out.println("------------------------------------------");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs22.wiki.TEST" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-09-29T16:59:47" hostname="DESKTOP-G34D6HI" time="0.054">
+<testsuite name="edu.bsu.cs22.wiki.TEST" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-03T00:13:33" hostname="DESKTOP-G34D6HI" time="0.083">
   <properties/>
-  <testcase name="RedirectTEST()" classname="edu.bsu.cs22.wiki.TEST" time="0.054"/>
+  <testcase name="RedirectTEST()" classname="edu.bsu.cs22.wiki.TEST" time="0.083"/>
   <system-out><![CDATA[------------------------------------------
 You have been redirected to: Frank Zappa
 ------------------------------------------

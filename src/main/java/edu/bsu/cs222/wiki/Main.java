@@ -1,19 +1,17 @@
 package edu.bsu.cs222.wiki;
 
 import javafx.application.Application;
-import javafx.event.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.*;
 
-import java.awt.*;
-
-public class Main extends Application
+public class Main extends Application implements EventHandler<ActionEvent>
 {
-    Button search;
 
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
     {
         //UI ui = new UI();
         //ui.startApplication();
@@ -23,18 +21,17 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        Parent root = FXMLLoader.load(getClass().getResource("/wiki.fxml"));
+
         primaryStage.setTitle("Wiki Search Simulator");
-
-        search = new Button();
-        search.setText("Search!");
-
-        StackPane layout = new StackPane();
-        layout.getChildren().add(search);
-
-        Scene scene = new Scene(layout);
-        primaryStage.setScene(scene);
-
-        primaryStage.setFullScreen(true);
+        primaryStage.setScene(new Scene(root,350,350));
         primaryStage.show();
+
+    }
+
+    @Override
+    public void handle(ActionEvent event)
+    {
+
     }
 }

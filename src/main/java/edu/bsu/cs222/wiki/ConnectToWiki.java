@@ -2,9 +2,12 @@ package edu.bsu.cs222.wiki;
 
 import java.io.InputStream;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 public class ConnectToWiki
 {
+
+
     public InputStream Query(String articleName) throws Exception
     {
         URL url = generateQueryURL(articleName);
@@ -39,6 +42,6 @@ public class ConnectToWiki
         String query = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop" +
                 "=timestamp%7Cuser&rvlimit=20&titles=";
 
-        return new URL(query + URLEncoder.encode(articleName, "UTF-8"));
+        return new URL(query + URLEncoder.encode(articleName, StandardCharsets.UTF_8));
     }
 }

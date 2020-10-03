@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.wiki.Controller">
-   <Label alignment="TOP_CENTER" text="Wiki Search Simulator" />
+   <Label alignment="TOP_CENTER" text="Enter a Wikipedia article you'd like to search for!" />
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="7.0">
       <Label text="Article Name:" />
       <TextField fx:id="urlField" alignment="CENTER" />

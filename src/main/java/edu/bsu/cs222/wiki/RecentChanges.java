@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 public class RecentChanges
 {
-    public String mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public void mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
 
@@ -24,8 +24,6 @@ public class RecentChanges
             System.out.println(timeStamp);
             System.out.println("--------------------------");
         }
-
         System.out.println("Done!");
-        return "Done!";
     }
 }

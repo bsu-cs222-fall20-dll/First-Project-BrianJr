@@ -13,25 +13,23 @@ public class Controller
 
     ConnectToWiki wiki = new ConnectToWiki();
     UserRevisionSorter sorter = new UserRevisionSorter();
-    InputStream wikiConnection = wiki.Query(urlField);
-   // InputStream wikiConnection = wiki.Query(urlField.getText());
-
-    public Controller() throws Exception
-    {
-    }
-
 
     @FXML @SuppressWarnings("unused")
-    public void showRecentChanges(ActionEvent actionEvent) throws Notify
+    public void showRecentChanges(ActionEvent actionEvent) throws Exception
     {
+        InputStream wikiConnection = wiki.Query(urlField.getText());
+
         RecentChanges changes = new RecentChanges();
         changes.mostRecentEditor(sorter, wikiConnection);
     }
 
 
     @FXML@SuppressWarnings("unused")
-    public void showActiveEditors(ActionEvent actionEvent) throws Notify
+    public void showActiveEditors(ActionEvent actionEvent) throws Exception
     {
+
+        InputStream wikiConnection = wiki.Query(urlField.getText());
+
         ActiveEditor activeUser = new ActiveEditor();
         activeUser.mostActiveEditor(sorter, wikiConnection);
     }

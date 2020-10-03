@@ -1,14 +1,14 @@
 package edu.bsu.cs222.wiki;
 
-import javafx.scene.control.TextField;
-
 import java.io.InputStream;
-import java.net.*;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class ConnectToWiki
 {
-    public InputStream Query(TextField articleName) throws Exception
+    public InputStream Query(String articleName) throws Exception
     {
         URL url = generateQueryURL(articleName);
         java.net.URLConnection connection = url.openConnection();
@@ -37,7 +37,8 @@ public class ConnectToWiki
         return in;
     }
 
-    public URL generateQueryURL(TextField articleName) throws Exception
+
+    public URL generateQueryURL(String articleName) throws Exception
     {
         String query = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop" +
                 "=timestamp%7Cuser&rvlimit=20&titles=";

@@ -12,45 +12,44 @@ import java.util.*;
 
 public class RecentChanges
 {
-    public List<String> mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
-        ObservableList<String> oList = FXCollections.observableArrayList();
-
-        List<String> editorList = new ArrayList<>();
+        ObservableList<String> names = FXCollections.observableArrayList();
+        int count = 0;
 
         for (int i = 0; i < array.size(); i++)
         {
-
+            count++;
             JsonObject userElement = array.get(i).getAsJsonObject();
             JsonElement editor = userElement.get("user");
 
-            String editorString = String.valueOf(editor);
+            String editorElement = String.valueOf(editor);
 
-            editorList.add(editorString);
+            names.add("Editor " +count + " - " + editorElement);
         }
 
-//        editorList = FXCollections.observableArrayList();
-//        return editorList;
-
-        return editorList;
+        return names;
     }
 
 
-    public String timeStamp(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> timeStamp(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
-        ArrayList<JsonElement> timeStampList = new ArrayList<>();
+        ObservableList<String> timeStampList = FXCollections.observableArrayList();
+        int count = 0;
 
         for (int i = 0; i < array.size(); i++)
         {
-
+            count++;
             JsonObject userElement = array.get(i).getAsJsonObject();
             JsonElement timestamp = userElement.get("timestamp");
 
-            timeStampList.add(timestamp);
+            String stampElement = String.valueOf(timestamp);
+
+            timeStampList.add("Timestamp " +count + " - " + stampElement);
 
         }
-        return String.valueOf(timeStampList);
+        return timeStampList;
     }
 }

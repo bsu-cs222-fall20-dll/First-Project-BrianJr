@@ -15,13 +15,11 @@ public class Controller
     private TextField urlField;
 
     @FXML
-    private TextArea editorOutputText;
+    private ListView<String> editorOutputText;
 
     @FXML
-    private TextArea timeStampOutputText;
+    private ListView<String> timeStampOutputText;
 
-    @FXML
-    private ListView<String> editorList;
 
     ConnectToWiki wiki = new ConnectToWiki();
     UserRevisionSorter sorter = new UserRevisionSorter();
@@ -32,13 +30,7 @@ public class Controller
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
         RecentChanges changes = new RecentChanges();
-
-        editorOutputText.setText(String.valueOf(changes.mostRecentEditor(sorter,wikiConnection)));
-
-        ObservableList<String> names = FXCollections.observableArrayList("Greg","jerry","dat boi BOB", "sum1 Save " +
-                "me pls", "...", "...", "...", "...", "...", "...", "...", "rip");
-        editorList.setItems(names);
-
+        editorOutputText.setItems(changes.mostRecentEditor(sorter,wikiConnection));
         timeStamp(actionEvent);
     }
 
@@ -48,7 +40,7 @@ public class Controller
             InputStream wikiConnection = wiki.Query(urlField.getText());
 
             RecentChanges changes = new RecentChanges();
-            timeStampOutputText.setText(changes.timeStamp(sorter,wikiConnection));
+            timeStampOutputText.setItems(changes.timeStamp(sorter,wikiConnection));
         }
 
 

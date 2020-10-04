@@ -36,11 +36,10 @@
             <Insets top="7.0" />
          </HBox.margin>
       </Label>
-      <TextArea fx:id="editorOutputText" prefHeight="300" prefWidth="400" text="  " wrapText="true">
+      <ListView fx:id="editorOutputText" prefHeight="500.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
-         </HBox.margin>
-      </TextArea>
+         </HBox.margin></ListView>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <Label text="Stamps       ">
@@ -48,19 +47,9 @@
             <Insets top="7.0" />
          </HBox.margin>
       </Label>
-      <TextArea fx:id="timeStampOutputText" prefHeight="300.0" prefWidth="400.0" wrapText="true">
+      <ListView fx:id="timeStampOutputText" prefHeight="500.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
-         </HBox.margin>
-      </TextArea>
-   </HBox>
-   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <children>
-         <Label text="                   " />
-         <ListView fx:id="editorList" prefHeight="300.0" prefWidth="400.0">
-            <HBox.margin>
-               <Insets top="7.0" />
-            </HBox.margin></ListView>
-      </children>
+         </HBox.margin></ListView>
    </HBox>
 </VBox>

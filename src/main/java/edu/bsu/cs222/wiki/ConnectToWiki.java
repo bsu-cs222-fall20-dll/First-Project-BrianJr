@@ -17,7 +17,7 @@ public class ConnectToWiki
         { System.out.println("Connection has not been established."); }
 
         assert connection != null;
-        connection.setRequestProperty("User-Agent", "Project UNO/0.1 (bkwalker@bsu.edu)");
+        connection.setRequestProperty("User-Agent", "Project UNO/0.2 (bkwalker@bsu.edu)");
         connection.connect();
 
         InputStream in;
@@ -36,7 +36,6 @@ public class ConnectToWiki
 
         return in;
     }
-
 
     public URL generateQueryURL(String articleName) throws Exception
     {

@@ -15,7 +15,7 @@ public class RecentChanges
     public ObservableList<String> mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
-        ObservableList<String> names = FXCollections.observableArrayList();
+        ObservableList<String> editorList = FXCollections.observableArrayList();
         int count = 0;
 
         for (int i = 0; i < array.size(); i++)
@@ -26,10 +26,9 @@ public class RecentChanges
 
             String editorElement = String.valueOf(editor);
 
-            names.add("Editor " +count + " - " + editorElement);
+            editorList.add("Editor " +count + " - " + editorElement);
         }
-
-        return names;
+        return editorList;
     }
 
 
@@ -48,7 +47,6 @@ public class RecentChanges
             String stampElement = String.valueOf(timestamp);
 
             timeStampList.add("Timestamp " +count + " - " + stampElement);
-
         }
         return timeStampList;
     }

@@ -13,28 +13,37 @@ public class ActiveEditor
         ObservableList<String> numberOfChanges = FXCollections.observableArrayList();
         int userCount = 0;
 
-        for (int i = 0; i < array.size(); i++)
+        try
         {
-            int userChanges = 0;
-            userCount++;
-            JsonObject userElement = array.get(i).getAsJsonObject();
-            JsonElement currentUser = userElement.get("user");
-
-            for (int j = i + 1; j < array.size(); j++)
+            for (int i = 0; i < array.size(); i++)
             {
-                JsonObject theNextUserElement = array.get(j).getAsJsonObject();
-                JsonElement theNextUser = theNextUserElement.get("user");
+                int userChanges = 0;
+                userCount++;
+                JsonObject userElement = array.get( i ).getAsJsonObject();
+                JsonElement currentUser = userElement.get( "user" );
 
-                if (currentUser.equals(theNextUser))
-                { userChanges = userChanges + 1; }
-            }
+                for ( int j = i + 1; j < array.size(); j++ )
+                {
+                    JsonObject theNextUserElement = array.get( j ).getAsJsonObject();
+                    JsonElement theNextUser = theNextUserElement.get( "user" );
 
-            if (userChanges >= 0)
-            {
-                numberOfChanges.add((("Number of changes for Editor "+ userCount+ " - "
-                        + ( userChanges +1 ))));
+                    if ( currentUser.equals( theNextUser ) )
+                    {
+                        userChanges = userChanges + 1;
+                    }
+                }
+
+                if ( userChanges >= 0 )
+                {
+                    numberOfChanges.add( ( ( "Number of changes for Editor " + userCount + " - "
+                            + ( userChanges + 1 ) ) ) );
+                }
             }
         }
+
+        catch ( NullPointerException e )
+        { numberOfChanges.add( "Invalid Search Value or Page Not Found" ); }
+
         return numberOfChanges;
     }
 

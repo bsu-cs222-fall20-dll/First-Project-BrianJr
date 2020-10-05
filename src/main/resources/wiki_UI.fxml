@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -59,4 +60,7 @@
          <Insets left="525.0" top="7.0" />
       </VBox.margin>
    </Button>
+   <effect>
+      <Reflection />
+   </effect>
 </VBox>

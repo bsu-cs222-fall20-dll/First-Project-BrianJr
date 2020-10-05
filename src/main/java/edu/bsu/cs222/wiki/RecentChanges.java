@@ -13,21 +13,30 @@ public class RecentChanges
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> editorList = FXCollections.observableArrayList();
-        int count = 0;
-
-        for (int i = 0; i < array.size(); i++)
+        try
         {
-            count++;
-            JsonObject userElement = array.get(i).getAsJsonObject();
-            JsonElement editor = userElement.get("user");
+            int count = 0;
 
-            String editorElement = String.valueOf(editor);
+            for (int i = 0; i < array.size(); i++)
+            {
+                count++;
+                JsonObject userElement = array.get(i).getAsJsonObject();
+                JsonElement editor = userElement.get("user");
 
-            editorList.add("Editor " +count + " - " + editorElement);
+                String editorElement = String.valueOf(editor);
+
+                editorList.add("Editor " +count + " - " + editorElement);
+            }
+        }
+
+        catch ( NullPointerException e )
+        {
+//            System.out.println("Invalid Search Value or Page Not Found");
+//            System.exit( 0 );
+            editorList.add( "Invalid Search Value or Page Not Found" );
         }
         return editorList;
     }
-
 
     public ObservableList<String> timeStamp(UserRevisionSorter revisionParser, InputStream connection) throws Exception
     {

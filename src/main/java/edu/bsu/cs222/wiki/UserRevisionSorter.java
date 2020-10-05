@@ -36,20 +36,30 @@ public class UserRevisionSorter
 
     public JsonArray parse(JsonObject queryObject) throws Exception
     {
-        JsonObject pages = queryObject.getAsJsonObject("pages");
         JsonArray array = null;
 
-        // ITERATE OVER EVERY ENTRY IN PAGES
-        for (Map.Entry <String, JsonElement> entry : pages.entrySet())
+        try
         {
-            boolean pageNotFound = entry.getKey().equals("-1");
-            if (pageNotFound)
-            { throw new Exception("Page Not Found"); }
+            JsonObject pages = queryObject.getAsJsonObject( "pages" );
 
-            JsonObject entryObject = entry.getValue().getAsJsonObject();
-            array = entryObject.getAsJsonArray("revisions");
+            // ITERATE OVER EVERY ENTRY IN PAGES
+            for ( Map.Entry < String, JsonElement > entry : pages.entrySet() )
+            {
+                boolean pageNotFound = entry.getKey().equals( "-1" );
+
+                if ( pageNotFound )
+                {
+                    throw new Exception( "Page Not Found!" );
+                }
+
+                JsonObject entryObject = entry.getValue().getAsJsonObject();
+                array = entryObject.getAsJsonArray( "revisions" );
+            }
+            return array;
         }
-        return array;
+
+        catch ( NullPointerException e )
+        { return null; }
     }
 }
 

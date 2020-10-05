@@ -14,40 +14,27 @@
          <Insets />
       </VBox.margin>
    </HBox>
-   <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#showActiveEditors" prefHeight="16.0" prefWidth="113.0" text="Show Active Editors">
+   <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#showEditorChanges" text="Editors &amp; Changes">
       <font>
          <Font name="Calibri" size="12.0" />
       </font>
       <VBox.margin>
-         <Insets right="120.0" />
+         <Insets bottom="7.0" right="19.0" top="7.0" />
       </VBox.margin>
    </Button>
-   <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#showRecentChanges" text="Show Recent Editors">
+   <Button mnemonicParsing="false" onAction="#showRecentChanges" text="Editors &amp; Timestamps ">
       <font>
          <Font name="Calibri" size="12.0" />
       </font>
-      <VBox.margin>
-         <Insets right="115.0" top="7.0" />
-      </VBox.margin>
    </Button>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <Label text="Editors        ">
-         <HBox.margin>
-            <Insets top="7.0" />
-         </HBox.margin>
-      </Label>
-      <ListView fx:id="editorOutputText" prefHeight="500.0" prefWidth="500.0">
+      <ListView fx:id="top_outputBox" prefHeight="500.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
          </HBox.margin></ListView>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <Label text="Stamps       ">
-         <HBox.margin>
-            <Insets top="7.0" />
-         </HBox.margin>
-      </Label>
-      <ListView fx:id="timeStampOutputText" prefHeight="500.0" prefWidth="500.0">
+      <ListView fx:id="bottom_outputBox" prefHeight="500.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
          </HBox.margin></ListView>

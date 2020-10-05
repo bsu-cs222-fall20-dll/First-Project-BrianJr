@@ -1,11 +1,8 @@
 package edu.bsu.cs222.wiki;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import java.io.InputStream;
 
@@ -15,10 +12,10 @@ public class Controller
     private TextField urlField;
 
     @FXML
-    private ListView<String> editorOutputText;
+    private ListView<String> top_outputBox;
 
     @FXML
-    private ListView<String> timeStampOutputText;
+    private ListView<String> bottom_outputBox;
 
 
     ConnectToWiki wiki = new ConnectToWiki();
@@ -30,7 +27,7 @@ public class Controller
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
         RecentChanges changes = new RecentChanges();
-        editorOutputText.setItems(changes.mostRecentEditor(sorter,wikiConnection));
+        top_outputBox.setItems(changes.mostRecentEditor(sorter,wikiConnection));
         timeStamp(actionEvent);
     }
 
@@ -40,16 +37,26 @@ public class Controller
             InputStream wikiConnection = wiki.Query(urlField.getText());
 
             RecentChanges changes = new RecentChanges();
-            timeStampOutputText.setItems(changes.timeStamp(sorter,wikiConnection));
+            bottom_outputBox.setItems(changes.timeStamp(sorter,wikiConnection));
         }
 
 
     @FXML @SuppressWarnings("unused")
-    public void showActiveEditors(ActionEvent actionEvent) throws Exception
+    public void showEditorChanges(ActionEvent actionEvent) throws Exception
     {
         ActiveEditor activeUser = new ActiveEditor();
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
-        activeUser.mostActiveEditor(sorter, wikiConnection);
+        bottom_outputBox.setItems(activeUser.editorChanges(sorter, wikiConnection));
+        showMostActiveEditors(actionEvent);
+    }
+
+    @FXML @SuppressWarnings("unused")
+    public void showMostActiveEditors(ActionEvent actionEvent) throws Exception
+    {
+        ActiveEditor activeUser = new ActiveEditor();
+        InputStream wikiConnection = wiki.Query(urlField.getText());
+
+        top_outputBox.setItems(activeUser.mostActiveEditors(sorter, wikiConnection));
     }
 }

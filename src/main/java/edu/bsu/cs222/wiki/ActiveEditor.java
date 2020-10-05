@@ -1,18 +1,18 @@
 package edu.bsu.cs222.wiki;
 
 import com.google.gson.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import java.io.InputStream;
 
 public class ActiveEditor
 {
-    public void mostActiveEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> editorChanges(UserRevisionSorter revisionParser, InputStream connection) throws Notify
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
-       // HashMap<Integer, JsonElement> orderedUserList = new HashMap<>();
-
+        ObservableList<String> numberOfChanges = FXCollections.observableArrayList();
         int userCount = 0;
 
-        //Collects first user element in the array, currentUser
         for (int i = 0; i < array.size(); i++)
         {
             int userChanges = 0;
@@ -20,34 +20,39 @@ public class ActiveEditor
             JsonObject userElement = array.get(i).getAsJsonObject();
             JsonElement currentUser = userElement.get("user");
 
-            //Collects the next user element in the array, theNextUser
             for (int j = i + 1; j < array.size(); j++)
             {
                 JsonObject theNextUserElement = array.get(j).getAsJsonObject();
                 JsonElement theNextUser = theNextUserElement.get("user");
 
-                //Checks if the currentUser appears twice in the array
-                //If so, update the  number of changes for currentUser
                 if (currentUser.equals(theNextUser))
                 { userChanges = userChanges + 1; }
             }
 
             if (userChanges >= 0)
             {
-               // System.out.println(orderedUserList);
-                System.out.println("--------------------------");
-                System.out.printf("Active Editor #%d: ", userCount);
-                System.out.print(currentUser);
-                System.out.println("\nNumber of changes made to article: " + (userChanges + 1)  );
-            }
-
-            if (userChanges < 0)
-            {
-                System.out.println("There has been no changes to this article.");
+                numberOfChanges.add((("Number of changes for Editor "+ userCount+ " - "
+                        + userChanges + 1)));
             }
         }
+        return numberOfChanges;
+    }
 
-        System.out.println("--------------------------");
-        System.out.println("Done!");
+    public ObservableList<String> mostActiveEditors(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    {
+        JsonArray array = revisionParser.getUserRevisionArray(connection);
+        ObservableList<String> mostActiveEditors = FXCollections.observableArrayList();
+
+        int count = 0;
+        for (int i = 0; i < array.size(); i++)
+        {
+            count++;
+            JsonObject userElement = array.get(i).getAsJsonObject();
+            JsonElement editor = userElement.get("user");
+
+            String editorElement = String.valueOf(editor);
+            mostActiveEditors.add("Editor " +count + " - " + editorElement);
+        }
+            return mostActiveEditors;
     }
 }

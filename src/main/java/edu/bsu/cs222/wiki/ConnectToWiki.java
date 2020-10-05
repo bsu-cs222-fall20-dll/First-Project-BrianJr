@@ -26,9 +26,6 @@ public class ConnectToWiki
         {
             in = connection.getInputStream();
             assert false;
-
-            System.out.println("--------------------------");
-            System.out.println("Connection Established!");
         }
 
         catch(SocketTimeoutException e)

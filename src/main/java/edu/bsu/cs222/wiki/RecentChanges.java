@@ -46,7 +46,7 @@ public class RecentChanges
 
             String stampElement = String.valueOf(timestamp);
 
-            timeStampList.add("Timestamp " +count + " - " + stampElement);
+            timeStampList.add("Timestamp for Editor " +count + " - " + stampElement);
         }
         return timeStampList;
     }

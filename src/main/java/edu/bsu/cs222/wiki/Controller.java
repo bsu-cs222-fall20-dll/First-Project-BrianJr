@@ -17,11 +17,10 @@ public class Controller
     @FXML
     private ListView<String> bottom_outputBox;
 
-
     ConnectToWiki wiki = new ConnectToWiki();
     UserRevisionSorter sorter = new UserRevisionSorter();
 
-    @FXML @SuppressWarnings("unused")
+    @FXML
     public void showRecentChanges(ActionEvent actionEvent) throws Exception
     {
         InputStream wikiConnection = wiki.Query(urlField.getText());
@@ -40,17 +39,6 @@ public class Controller
             bottom_outputBox.setItems(changes.timeStamp(sorter,wikiConnection));
         }
 
-
-    @FXML @SuppressWarnings("unused")
-    public void showEditorChanges(ActionEvent actionEvent) throws Exception
-    {
-        ActiveEditor activeUser = new ActiveEditor();
-        InputStream wikiConnection = wiki.Query(urlField.getText());
-
-        bottom_outputBox.setItems(activeUser.editorChanges(sorter, wikiConnection));
-        showMostActiveEditors(actionEvent);
-    }
-
     @FXML @SuppressWarnings("unused")
     public void showMostActiveEditors(ActionEvent actionEvent) throws Exception
     {
@@ -58,5 +46,15 @@ public class Controller
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
         top_outputBox.setItems(activeUser.mostActiveEditors(sorter, wikiConnection));
+    }
+
+    @FXML
+    public void showEditorChanges(ActionEvent actionEvent) throws Exception
+    {
+        ActiveEditor activeUser = new ActiveEditor();
+        InputStream wikiConnection = wiki.Query(urlField.getText());
+
+        bottom_outputBox.setItems(activeUser.editorChanges(sorter, wikiConnection));
+        showMostActiveEditors(actionEvent);
     }
 }

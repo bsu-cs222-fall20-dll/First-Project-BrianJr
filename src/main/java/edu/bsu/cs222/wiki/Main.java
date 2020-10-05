@@ -11,7 +11,6 @@ import javafx.stage.*;
 
 public class Main extends Application implements EventHandler<ActionEvent>
 {
-
     public static void main(String[] args)
     { launch(args); }
 
@@ -26,6 +25,5 @@ public class Main extends Application implements EventHandler<ActionEvent>
     }
 
     @Override
-    public void handle(ActionEvent event)
-    {}
+    public void handle(ActionEvent event) {}
 }

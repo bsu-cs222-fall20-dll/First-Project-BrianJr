@@ -6,13 +6,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.stage.*;
+import javafx.stage.Stage;
 
 public class Main extends Application implements EventHandler<ActionEvent>
 {
-    public static void main(String[] args)
-    { launch(args); }
+    public static void main(String[] brian)
+    { launch(brian); }
 
     @Override
     public void start(Stage primaryStage) throws Exception

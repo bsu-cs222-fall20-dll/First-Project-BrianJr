@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class UserRevisionSorter
 {
-    public JsonArray getUserRevisionArray(InputStream connection) throws Notify
+    public JsonArray getUserRevisionArray(InputStream connection) throws Exception
     { return parse(getQueryObject(connection)); }
 
     public JsonObject getQueryObject(InputStream stream)
@@ -34,7 +34,7 @@ public class UserRevisionSorter
         }
     }
 
-    public JsonArray parse(JsonObject queryObject) throws Notify
+    public JsonArray parse(JsonObject queryObject) throws Exception
     {
         JsonObject pages = queryObject.getAsJsonObject("pages");
         JsonArray array = null;
@@ -44,7 +44,8 @@ public class UserRevisionSorter
         {
             boolean pageNotFound = entry.getKey().equals("-1");
             if (pageNotFound)
-            { throw new Notify("Page not found"); }
+            { throw new Exception("Page Not Found"); }
+
             JsonObject entryObject = entry.getValue().getAsJsonObject();
             array = entryObject.getAsJsonArray("revisions");
         }

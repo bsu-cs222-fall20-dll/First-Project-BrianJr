@@ -2,11 +2,15 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.wiki.Controller">
-   <Label alignment="TOP_CENTER" text="Enter a Wikipedia article you'd like to search for!" />
+   <Label alignment="TOP_CENTER" text="Enter a Wikipedia article you'd like to search for!">
+      <VBox.margin>
+         <Insets top="8.0" />
+      </VBox.margin></Label>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="7.0">
       <Label text="Article Name:" />
       <TextField fx:id="urlField" alignment="CENTER" />
@@ -14,29 +18,45 @@
          <Insets />
       </VBox.margin>
    </HBox>
+   <ImageView fx:id="logo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@flame_logo.png" />
+   </ImageView>
    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#showEditorChanges" text="Editors &amp; Changes">
       <font>
          <Font name="Calibri" size="12.0" />
       </font>
       <VBox.margin>
-         <Insets bottom="7.0" right="19.0" top="7.0" />
+         <Insets bottom="7.0" right="334.0" top="7.0" />
       </VBox.margin>
    </Button>
    <Button mnemonicParsing="false" onAction="#showRecentChanges" text="Editors &amp; Timestamps ">
       <font>
          <Font name="Calibri" size="12.0" />
       </font>
+      <VBox.margin>
+         <Insets left="22.0" right="335.0" />
+      </VBox.margin>
    </Button>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <ListView fx:id="top_outputBox" prefHeight="500.0" prefWidth="500.0">
+      <ImageView fx:id="top_checkMark" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+      <ListView fx:id="top_outputBox" prefHeight="650.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
          </HBox.margin></ListView>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <ListView fx:id="bottom_outputBox" prefHeight="500.0" prefWidth="500.0">
+      <ImageView fx:id="bottom_checkMark" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+      <ListView fx:id="bottom_outputBox" prefHeight="650.0" prefWidth="500.0">
          <HBox.margin>
             <Insets top="7.0" />
          </HBox.margin></ListView>
    </HBox>
+   <Button alignment="CENTER" mnemonicParsing="false" onAction="#exitProgram" text="Exit">
+      <font>
+         <Font name="Calibri" size="12.0" />
+      </font>
+      <VBox.margin>
+         <Insets left="525.0" top="7.0" />
+      </VBox.margin>
+   </Button>
 </VBox>

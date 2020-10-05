@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 public class ActiveEditor
 {
-    public ObservableList<String> editorChanges(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> editorChanges(UserRevisionSorter revisionParser, InputStream connection) throws Exception
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> numberOfChanges = FXCollections.observableArrayList();
@@ -32,13 +32,13 @@ public class ActiveEditor
             if (userChanges >= 0)
             {
                 numberOfChanges.add((("Number of changes for Editor "+ userCount+ " - "
-                        + userChanges + 1)));
+                        + ( userChanges +1 ))));
             }
         }
         return numberOfChanges;
     }
 
-    public ObservableList<String> mostActiveEditors(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> mostActiveEditors(UserRevisionSorter revisionParser, InputStream connection) throws Exception
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> mostActiveEditors = FXCollections.observableArrayList();

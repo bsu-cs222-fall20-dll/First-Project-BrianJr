@@ -1,18 +1,15 @@
 package edu.bsu.cs222.wiki;
 
-import com.google.gson.*;
-import javafx.beans.InvalidationListener;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-
 import java.io.InputStream;
-import java.util.*;
 
 public class RecentChanges
 {
-    public ObservableList<String> mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> mostRecentEditor(UserRevisionSorter revisionParser, InputStream connection) throws Exception
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> editorList = FXCollections.observableArrayList();
@@ -32,7 +29,7 @@ public class RecentChanges
     }
 
 
-    public ObservableList<String> timeStamp(UserRevisionSorter revisionParser, InputStream connection) throws Notify
+    public ObservableList<String> timeStamp(UserRevisionSorter revisionParser, InputStream connection) throws Exception
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> timeStampList = FXCollections.observableArrayList();

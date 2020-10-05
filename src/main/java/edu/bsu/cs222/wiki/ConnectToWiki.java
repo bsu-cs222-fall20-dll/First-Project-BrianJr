@@ -29,16 +29,22 @@ public class ConnectToWiki
         }
 
         catch(SocketTimeoutException e)
-        { throw new Notify("Page not found"); }
+        { return null; }
 
         return in;
     }
 
     public URL generateQueryURL(String articleName) throws Exception
     {
-        String query = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop" +
-                "=timestamp%7Cuser&rvlimit=20&titles=";
+        try
+        {
+            String query = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop" +
+                    "=timestamp%7Cuser&rvlimit=20&titles=";
 
-        return new URL(query + URLEncoder.encode(String.valueOf(articleName), StandardCharsets.UTF_8));
+            return new URL(query + URLEncoder.encode(String.valueOf(articleName), StandardCharsets.UTF_8));
+        }
+
+        catch ( NullPointerException e )
+        { return null; }
     }
 }

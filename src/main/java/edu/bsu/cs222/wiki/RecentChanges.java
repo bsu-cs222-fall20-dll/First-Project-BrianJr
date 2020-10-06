@@ -13,10 +13,10 @@ public class RecentChanges
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> editorList = FXCollections.observableArrayList();
+
         try
         {
             int count = 0;
-
             for (int i = 0; i < array.size(); i++)
             {
                 count++;
@@ -30,11 +30,8 @@ public class RecentChanges
         }
 
         catch ( NullPointerException e )
-        {
-//            System.out.println("Invalid Search Value or Page Not Found");
-//            System.exit( 0 );
-            editorList.add( "Invalid Search Value or Page Not Found" );
-        }
+        { editorList.add( "Search Bar Cannot Be Empty!" ); }
+
         return editorList;
     }
 
@@ -42,18 +39,25 @@ public class RecentChanges
     {
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> timeStampList = FXCollections.observableArrayList();
-        int count = 0;
 
-        for (int i = 0; i < array.size(); i++)
+        try
         {
-            count++;
-            JsonObject userElement = array.get(i).getAsJsonObject();
-            JsonElement timestamp = userElement.get("timestamp");
+            int count = 0;
+            for (int i = 0; i < array.size(); i++)
+            {
+                count++;
+                JsonObject userElement = array.get(i).getAsJsonObject();
+                JsonElement timestamp = userElement.get("timestamp");
 
-            String stampElement = String.valueOf(timestamp);
+                String stampElement = String.valueOf(timestamp);
 
-            timeStampList.add("Timestamp for Editor " +count + " - " + stampElement);
+                timeStampList.add("Timestamp for Editor " +count + " - " + stampElement);
+            }
         }
+
+        catch ( NullPointerException e )
+        { timeStampList.add( "Search Bar Cannot Be Empty!" ); }
+
         return timeStampList;
     }
 }

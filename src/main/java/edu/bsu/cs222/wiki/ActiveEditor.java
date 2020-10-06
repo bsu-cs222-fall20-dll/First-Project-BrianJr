@@ -42,7 +42,7 @@ public class ActiveEditor
         }
 
         catch ( NullPointerException e )
-        { numberOfChanges.add( "Invalid Search Value or Page Not Found" ); }
+        { numberOfChanges.add( "Search Bar Cannot Be Empty!" ); }
 
         return numberOfChanges;
     }
@@ -52,16 +52,23 @@ public class ActiveEditor
         JsonArray array = revisionParser.getUserRevisionArray(connection);
         ObservableList<String> mostActiveEditors = FXCollections.observableArrayList();
 
-        int count = 0;
-        for (int i = 0; i < array.size(); i++)
+        try
         {
-            count++;
-            JsonObject userElement = array.get(i).getAsJsonObject();
-            JsonElement editor = userElement.get("user");
+            int count = 0;
+            for (int i = 0; i < array.size(); i++)
+            {
+                count++;
+                JsonObject userElement = array.get(i).getAsJsonObject();
+                JsonElement editor = userElement.get("user");
 
-            String editorElement = String.valueOf(editor);
-            mostActiveEditors.add("Editor " +count + " - " + editorElement);
+                String editorElement = String.valueOf(editor);
+                mostActiveEditors.add("Editor " +count + " - " + editorElement);
+            }
         }
-            return mostActiveEditors;
+
+        catch ( Exception e )
+        { mostActiveEditors.add( "Search Bar Cannot Be Empty!" ); }
+
+        return mostActiveEditors;
     }
 }

@@ -4,10 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.io.File;
 import java.io.InputStream;
 
@@ -23,7 +21,10 @@ public class Controller
     private ListView<String> bottom_outputBox;
 
     @FXML
-    private ImageView logo;
+    private ImageView ASAP_logo;
+
+    @FXML
+    public ImageView coffee_time;
 
     @FXML
     private ImageView top_checkMark;
@@ -34,37 +35,38 @@ public class Controller
     ConnectToWiki wiki = new ConnectToWiki();
     UserRevisionSorter sorter = new UserRevisionSorter();
 
-    File file = new File( "src/main/resources/checkMark_green.png" );
+    File file = new File( "src/main/resources/png_photos/checkMark_green.png" );
     Image image = new Image(file.toURI().toString());
 
     public void initialize()
     {
-        File file = new File( "src/main/resources/flame_logo.png" );
-        Image image = new Image(file.toURI().toString());
-        logo.setImage( image );
+        File flame_logo_file = new File( "src/main/resources/png_photos/coffee_time_157x157.png" );
+        Image flame_logo = new Image(flame_logo_file.toURI().toString());
+        this.coffee_time.setImage( flame_logo );
+
+        File ASAP_logo_file = new File( "src/main/resources/png_photos/ASAP_Wiki_logo_157x87.png" );
+        Image ASAP_Wiki_logo = new Image(ASAP_logo_file.toURI().toString());
+        this.ASAP_logo.setImage( ASAP_Wiki_logo );
     }
 
     @FXML
     public void showRecentChanges(ActionEvent actionEvent) throws Exception
     {
         InputStream wikiConnection = wiki.Query(urlField.getText());
-
-        //Displays data
         RecentChanges changes = new RecentChanges();
-        top_outputBox.setItems(changes.mostRecentEditor(sorter,wikiConnection));
-        timeStamp(actionEvent);
 
-        //Displays green checkmarks
+        top_outputBox.setItems(changes.mostRecentEditor(sorter,wikiConnection));
+        showUserTimeStamps(actionEvent);
+
         top_checkMark.setImage( image );
         bottom_checkMark.setImage( image );
     }
 
     @FXML @SuppressWarnings("unused")
-    public void timeStamp(ActionEvent actionEvent) throws Exception
+    public void showUserTimeStamps(ActionEvent actionEvent) throws Exception
         {
             InputStream wikiConnection = wiki.Query(urlField.getText());
 
-            //Displays data
             RecentChanges changes = new RecentChanges();
             bottom_outputBox.setItems(changes.timeStamp(sorter,wikiConnection));
         }
@@ -75,10 +77,8 @@ public class Controller
         ActiveEditor activeUser = new ActiveEditor();
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
-        //Displays data
         top_outputBox.setItems(activeUser.mostActiveEditors(sorter, wikiConnection));
 
-        //Displays green checkmarks
         top_checkMark.setImage( image );
         bottom_checkMark.setImage( image );
     }
@@ -89,7 +89,6 @@ public class Controller
         ActiveEditor activeUser = new ActiveEditor();
         InputStream wikiConnection = wiki.Query(urlField.getText());
 
-        //Displays data
         bottom_outputBox.setItems(activeUser.editorChanges(sorter, wikiConnection));
         showMostActiveEditors(actionEvent);
     }

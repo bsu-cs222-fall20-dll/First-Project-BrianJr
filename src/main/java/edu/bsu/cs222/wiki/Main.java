@@ -18,8 +18,8 @@ public class Main extends Application implements EventHandler<ActionEvent>
     {
         Parent root = FXMLLoader.load(getClass().getResource("/wiki_UI.fxml"));
 
-        primaryStage.setTitle("Wiki Search Simulator");
-        primaryStage.setScene(new Scene(root,650,650));
+        primaryStage.setTitle("ASAP Wiki Search");
+        primaryStage.setScene(new Scene(root,612,675));
         primaryStage.show();
     }
 

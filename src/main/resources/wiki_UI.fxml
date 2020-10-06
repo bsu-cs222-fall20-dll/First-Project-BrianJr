@@ -8,6 +8,11 @@
 <?import javafx.scene.text.*?>
 
 <VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.wiki.Controller">
+   <ImageView fx:id="ASAP_logo" fitHeight="61.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+      <VBox.margin>
+         <Insets right="495.0" top="5.0" />
+      </VBox.margin>
+   </ImageView>
    <Label alignment="TOP_CENTER" text="Enter a Wikipedia article you'd like to search for!">
       <VBox.margin>
          <Insets top="8.0" />
@@ -19,8 +24,7 @@
          <Insets />
       </VBox.margin>
    </HBox>
-   <ImageView fx:id="logo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@flame_logo.png" />
+   <ImageView fx:id="coffee_time" fitHeight="157.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
    </ImageView>
    <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#showEditorChanges" text="Editors &amp; Changes">
       <font>

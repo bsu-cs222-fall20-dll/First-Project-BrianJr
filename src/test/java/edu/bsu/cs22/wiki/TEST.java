@@ -43,7 +43,7 @@ public class TEST
         JsonObject rootObject = sorter.getQueryObject(inputStream);
 
         System.out.println("------------------------------------------");
-        sorter.redirectedTo(rootObject);
+        sorter.isRedirectedTo(rootObject);
         System.out.println("------------------------------------------");
     }
 }

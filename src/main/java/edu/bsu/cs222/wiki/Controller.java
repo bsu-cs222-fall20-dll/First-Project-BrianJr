@@ -15,82 +15,82 @@ public class Controller
     private TextField urlField;
 
     @FXML
+    private ImageView ASAP_logo_view;
+
+    @FXML
+    public ImageView coffee_time_logo_view;
+
+    @FXML
+    private ImageView top_checkMark_view;
+
+    @FXML
     private ListView<String> top_outputBox;
+
+    @FXML
+    private ImageView bottom_checkMark_view;
 
     @FXML
     private ListView<String> bottom_outputBox;
 
-    @FXML
-    private ImageView ASAP_logo;
-
-    @FXML
-    public ImageView coffee_time;
-
-    @FXML
-    private ImageView top_checkMark;
-
-    @FXML
-    private ImageView bottom_checkMark;
-
     ConnectToWiki wiki = new ConnectToWiki();
+    RecentChanges changes = new RecentChanges();
+    ActiveEditor activeUser = new ActiveEditor();
     UserRevisionSorter sorter = new UserRevisionSorter();
 
-    File file = new File( "src/main/resources/png_photos/checkMark_green.png" );
-    Image image = new Image(file.toURI().toString());
+    File checkMark_green_file = new File( "src/main/resources/png_photos/checkMark_green.png" );
+    Image checkMark_green_icon = new Image( checkMark_green_file.toURI().toString());
 
     public void initialize()
     {
-        File flame_logo_file = new File( "src/main/resources/png_photos/coffee_time_157x157.png" );
-        Image flame_logo = new Image(flame_logo_file.toURI().toString());
-        this.coffee_time.setImage( flame_logo );
+        File coffee_time_file = new File( "src/main/resources/png_photos/coffee_time_157x157.png" );
+        Image coffee_time_logo = new Image(coffee_time_file.toURI().toString());
+        this.coffee_time_logo_view.setImage( coffee_time_logo );
 
         File ASAP_logo_file = new File( "src/main/resources/png_photos/ASAP_Wiki_logo_157x87.png" );
         Image ASAP_Wiki_logo = new Image(ASAP_logo_file.toURI().toString());
-        this.ASAP_logo.setImage( ASAP_Wiki_logo );
+        this.ASAP_logo_view.setImage( ASAP_Wiki_logo );
     }
 
     @FXML
-    public void showRecentChanges(ActionEvent actionEvent) throws Exception
+    public void showMostRecentEditors(ActionEvent actionEvent) throws Exception
     {
         InputStream wikiConnection = wiki.Query(urlField.getText());
-        RecentChanges changes = new RecentChanges();
+        top_outputBox.setItems(changes.getMostRecentEditors(sorter,wikiConnection));
 
-        top_outputBox.setItems(changes.mostRecentEditor(sorter,wikiConnection));
-        showUserTimeStamps(actionEvent);
-
-        top_checkMark.setImage( image );
-        bottom_checkMark.setImage( image );
+        showEditorTimeStamps(actionEvent);
+        showGreenCheckMarks();
     }
 
     @FXML @SuppressWarnings("unused")
-    public void showUserTimeStamps(ActionEvent actionEvent) throws Exception
+    public void showEditorTimeStamps(ActionEvent actionEvent) throws Exception
         {
             InputStream wikiConnection = wiki.Query(urlField.getText());
-
-            RecentChanges changes = new RecentChanges();
-            bottom_outputBox.setItems(changes.timeStamp(sorter,wikiConnection));
+            bottom_outputBox.setItems(changes.getEditorTimeStamps(sorter,wikiConnection));
         }
 
     @FXML @SuppressWarnings("unused")
     public void showMostActiveEditors(ActionEvent actionEvent) throws Exception
     {
-        ActiveEditor activeUser = new ActiveEditor();
         InputStream wikiConnection = wiki.Query(urlField.getText());
+        top_outputBox.setItems(activeUser.getMostActiveEditors(sorter, wikiConnection));
 
-        top_outputBox.setItems(activeUser.mostActiveEditors(sorter, wikiConnection));
-
-        top_checkMark.setImage( image );
-        bottom_checkMark.setImage( image );
+        showGreenCheckMarks();
     }
 
     @FXML
-    public void showEditorChanges(ActionEvent actionEvent) throws Exception
+    public void showEditorNumberOfChanges(ActionEvent actionEvent) throws Exception
     {
-        ActiveEditor activeUser = new ActiveEditor();
         InputStream wikiConnection = wiki.Query(urlField.getText());
+        bottom_outputBox.setItems(activeUser.getEditorNumberOfChanges(sorter, wikiConnection));
 
-        bottom_outputBox.setItems(activeUser.editorChanges(sorter, wikiConnection));
         showMostActiveEditors(actionEvent);
+    }
+
+    @FXML
+    public void showGreenCheckMarks()
+    {
+        top_checkMark_view.setImage( checkMark_green_icon );
+        bottom_checkMark_view.setImage( checkMark_green_icon );
     }
 
     @FXML

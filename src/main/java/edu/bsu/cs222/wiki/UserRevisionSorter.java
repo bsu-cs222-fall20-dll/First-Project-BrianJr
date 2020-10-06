@@ -13,30 +13,30 @@ public class UserRevisionSorter
     {
         JsonParser parser = new JsonParser();
         Reader reader = new InputStreamReader(stream);
-        // GETS THE ENTIRE JSON OBJECT
+
         JsonElement rootElement = parser.parse(reader);
-        // THE ROOT ELEMENT CONVERTS THAT ELEMENT INTO AN OBJECT WE CAN QUERY
         JsonObject rootObject = rootElement.getAsJsonObject();
+
         return rootObject.getAsJsonObject("query");
     }
 
-    public void redirectedTo(JsonObject queryObject)
+    public void isRedirectedTo( JsonObject queryObject)
     {
-        JsonArray array = queryObject.getAsJsonArray("redirects");
+        JsonArray redirectsArray = queryObject.getAsJsonArray("redirects");
 
-        if (array == null)
+        if (redirectsArray == null)
         { return; }
 
-        for (int i = 0; i < array.size(); i++)
+        for (int i = 0; i < redirectsArray.size(); i++)
         {
-            String redirectedTo = array.get(i).getAsJsonObject().get("to").getAsString();
+            String redirectedTo = redirectsArray.get(i).getAsJsonObject().get("to").getAsString();
             System.out.printf("You have been redirected to: %s\n",redirectedTo);
         }
     }
 
     public JsonArray parse(JsonObject queryObject) throws Exception
     {
-        JsonArray array = null;
+        JsonArray revisionArray = null;
 
         try
         {
@@ -48,14 +48,12 @@ public class UserRevisionSorter
                 boolean pageNotFound = entry.getKey().equals( "-1" );
 
                 if ( pageNotFound )
-                {
-                    throw new Exception( "Page Not Found!" );
-                }
+                { throw new Exception( "Page Not Found!" ); }
 
                 JsonObject entryObject = entry.getValue().getAsJsonObject();
-                array = entryObject.getAsJsonArray( "revisions" );
+                revisionArray = entryObject.getAsJsonArray( "revisions" );
             }
-            return array;
+            return revisionArray;
         }
 
         catch ( NullPointerException e )

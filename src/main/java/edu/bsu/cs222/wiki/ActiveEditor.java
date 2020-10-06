@@ -1,30 +1,54 @@
 package edu.bsu.cs222.wiki;
 
 import com.google.gson.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import java.io.InputStream;
 
 public class ActiveEditor
 {
-    public ObservableList<String> editorChanges(UserRevisionSorter revisionParser, InputStream connection) throws Exception
+    public ObservableList<String> getMostActiveEditors( UserRevisionSorter revisionParser, InputStream connection ) throws Exception
     {
-        JsonArray array = revisionParser.getUserRevisionArray(connection);
-        ObservableList<String> numberOfChanges = FXCollections.observableArrayList();
-        int userCount = 0;
+        JsonArray revisionArray = revisionParser.getUserRevisionArray(connection);
+        ObservableList<String> mostActiveEditorList = FXCollections.observableArrayList();
 
         try
         {
-            for (int i = 0; i < array.size(); i++)
+            int editorCount = 0;
+            for (int i = 0; i < revisionArray.size(); i++)
+            {
+                editorCount++;
+                JsonObject userElement = revisionArray.get(i).getAsJsonObject();
+                JsonElement editor = userElement.get("user");
+
+                String editorElement = String.valueOf(editor);
+                mostActiveEditorList.add("Editor " + editorCount + " - " + editorElement);
+            }
+        }
+
+        catch ( Exception e )
+        { mostActiveEditorList.add( "Search Bar Cannot Be Empty!" ); }
+
+        return mostActiveEditorList;
+    }
+
+    public ObservableList<String> getEditorNumberOfChanges( UserRevisionSorter revisionParser, InputStream connection ) throws Exception
+    {
+        JsonArray revisionArray = revisionParser.getUserRevisionArray(connection);
+        ObservableList<String> numberOfChangesList = FXCollections.observableArrayList();
+
+        try
+        {
+            int editorCount = 0;
+            for (int i = 0; i < revisionArray.size(); i++)
             {
                 int userChanges = 0;
-                userCount++;
-                JsonObject userElement = array.get( i ).getAsJsonObject();
+                editorCount++;
+                JsonObject userElement = revisionArray.get( i ).getAsJsonObject();
                 JsonElement currentUser = userElement.get( "user" );
 
-                for ( int j = i + 1; j < array.size(); j++ )
+                for ( int j = i + 1; j < revisionArray.size(); j++ )
                 {
-                    JsonObject theNextUserElement = array.get( j ).getAsJsonObject();
+                    JsonObject theNextUserElement = revisionArray.get( j ).getAsJsonObject();
                     JsonElement theNextUser = theNextUserElement.get( "user" );
 
                     if ( currentUser.equals( theNextUser ) )
@@ -35,40 +59,15 @@ public class ActiveEditor
 
                 if ( userChanges >= 0 )
                 {
-                    numberOfChanges.add( ( ( "Number of changes for Editor " + userCount + " - "
+                    numberOfChangesList.add( ( ( "Number of changes for Editor " + editorCount + " - "
                             + ( userChanges + 1 ) ) ) );
                 }
             }
         }
 
         catch ( NullPointerException e )
-        { numberOfChanges.add( "Search Bar Cannot Be Empty!" ); }
+        { numberOfChangesList.add( "Search Bar Cannot Be Empty!" ); }
 
-        return numberOfChanges;
-    }
-
-    public ObservableList<String> mostActiveEditors(UserRevisionSorter revisionParser, InputStream connection) throws Exception
-    {
-        JsonArray array = revisionParser.getUserRevisionArray(connection);
-        ObservableList<String> mostActiveEditors = FXCollections.observableArrayList();
-
-        try
-        {
-            int count = 0;
-            for (int i = 0; i < array.size(); i++)
-            {
-                count++;
-                JsonObject userElement = array.get(i).getAsJsonObject();
-                JsonElement editor = userElement.get("user");
-
-                String editorElement = String.valueOf(editor);
-                mostActiveEditors.add("Editor " +count + " - " + editorElement);
-            }
-        }
-
-        catch ( Exception e )
-        { mostActiveEditors.add( "Search Bar Cannot Be Empty!" ); }
-
-        return mostActiveEditors;
+        return numberOfChangesList;
     }
 }
